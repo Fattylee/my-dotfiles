@@ -44,3 +44,22 @@ endsnippet
 install termux-api from playstore
 $ pkg install termux-api
 ctl-v/ctl-c <=> termux-clipboard-get/set
+
+## termux extra keys
+
+# Open a new terminal with ctrl + t (volume down + t)
+shortcut.create-session = ctrl + 3
+
+# Go one session down with (for example) ctrl + 2
+shortcut.next-session = ctrl + 2
+
+# Go one session up with (for example) ctrl + 1
+shortcut.previous-session = ctrl + 1
+
+# Rename a session with (for example) ctrl + n
+shortcut.rename-session = ctrl + 4
+
+extra-keys = [ \
+ ['ESC','|','/','HOME','UP','END','$','BACKSLASH'], \
+ ['TAB','CTRL','-','LEFT','DOWN','RIGHT','PGDN','_'] \
+]
