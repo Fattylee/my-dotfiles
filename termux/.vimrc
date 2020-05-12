@@ -24,17 +24,23 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 "Plug 'shougo/deoplete.nvim'
 " Initialize plugin system
+Plug 'ai/autoprefixer'
+Plug 'ap/vim-css-color'
+Plug 'KabbAmine/vCoolor.vim'
+" Plug 'nathanaelkane/vim-indent-guides'
+" Plug 'lepture/vim-jinja'
+Plug 'Yggdroot/indentLine'
+Plug 'luochen1990/rainbow'
 call plug#end()
 
+let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 
-vnoremap <C-c> :w !termux-clipboard-set<CR><CR> 
-noremap <C-v> :r !termux-clipboard-get<CR><CR>
-inoremap <C-v> <esc>:r !termux-clipboard-get<CR><CR>A
-"start christoomey system copy
-let g:system_copy#copy_command='termux-clipboard-set '
-"let g:system_copy#paste_command='!termux-clipboard-set clipboard'
-"end christoomey system copy
+" remove highlight text
+nmap <space>, :noh<CR>
 
+" This way, whenever you type % you jump to the matching object, and you visually select all the text in between.
+noremap % v%
+noremap <Tab> v%
 " vim-airline tab settings
 let g:airline#extensions#tabline#enabled = 1
 "let g:airline#extensions#tabline#left_sep = ' '
@@ -45,6 +51,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:user_emmet_leader_key=','
 
 map <F3> :setlocal spell! spelllang=en_us<CR>
+" auto save with 'jk' keys"
 inoremap jk <ESC>:w<cr>
 
 
@@ -117,129 +124,9 @@ set gdefault
 set incsearch
 set showmatch
 set hlsearch
-"set clipboard=unnamedplus
+"set y and p for both system and vim
 set clipboard^=unnamed,unnamedplus
-nnoremap <leader><space> :noh<cr>
-nnoremap <tab> %
-vnoremap <tab> %
-nnoremap ; :
-"End http://stevelosh.com/blog/2010/09/coming-home-to-vim/#important-vimrc-lines
-
-
-"copy and paste
-function Func2X11() 
-  :call system('xclip -selection c', @r) 
-endfunction
-
-vnoremap <F9> "ry:call Func2X11()<cr> 
-vnoremap <m-c> "ry:call Func2X11()<cr> 
-vnoremap <ESC-c> "ry:call Func2X11()<cr>
-" end copy and paste
-
-" start frazrepo/vim-rainbow global declaration
-let g:rainbow_active = 1
-" end frazrepo/vim-rainbow
-
-
-colorscheme gruvbox
-
-
-" sync open file with NERDTree
-" " Check if NERDTree is open or active
-function! IsNERDTreeOpen()        
-  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-endfunction
-
-" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
-" file, and we're not in vimdiff
-function! SyncTree()
-  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
-    NERDTreeFind
-    wincmd p
-  endif
-endfunction
-
-" Highlight currently open buffer in NERDTree
-autocmd BufEnter * call SyncTree()
-
-" coc config
-let g:coc_global_extensions = [
-  \ 'coc-snippets',
-  \ 'coc-pairs',
-  \ 'coc-tsserver',
-  \ 'coc-eslint', 
-  \ 'coc-prettier', 
-  \ 'coc-json', 
-  \ ]
-" from readme
-" if hidden is not set, TextEdit might fail.
-set hidden " Some servers have issues with backup files, see #649 set nobackup set nowritebackup " Better display for messages set cmdheight=2 " You will have bad experience for diagnostic messages when it's default 4000.
-set updatetime=300
-
-" don't give |ins-completion-menu| messages.
-set shortmess+=c
-
-" always show signcolumns
-set signcolumn=yes
-
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" Or use `complete_info` if your vim support it, like:
-" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-
-" Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Remap for rename current word
-nmap <F2> <Plug>(coc-rename)
-
-" Remap for format selected region
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder
+" Update signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
@@ -322,3 +209,9 @@ set statusline^=%{get(g:,'coc_git_status','')}%{get(b:,'coc_git_status','')}%{ge
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 "To get correct comment highlighting for coc-settings.json
 autocmd FileType json syntax match Comment +\/\/.\+$+
+
+" termux system copy and paste
+vnoremap <C-c> :w !termux-clipboard-set<CR><CR>
+noremap <C-v> :r !termux-clipboard-get<CR><CR>
+inoremap <C-v> <esc>:r !termux-clipboard-get<CR><CR>A
+
