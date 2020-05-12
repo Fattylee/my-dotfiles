@@ -31,6 +31,7 @@ Plug 'KabbAmine/vCoolor.vim'
 " Plug 'lepture/vim-jinja'
 Plug 'Yggdroot/indentLine'
 Plug 'luochen1990/rainbow'
+Plug 'mhinz/vim-startify'
 call plug#end()
 
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
@@ -126,7 +127,7 @@ set showmatch
 set hlsearch
 "set y and p for both system and vim
 set clipboard^=unnamed,unnamedplus
-" Update signature help on jump placeholder
+  " Update signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
