@@ -1,4 +1,12 @@
 {
+  // "emmet.includeLanguages": {
+  //   "javascript": "javascriptreact",
+  //   "typescript": "typescriptreact"
+  // },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "emmet.triggerExpansionOnTab": true,
+  "workbench.panel.defaultLocation": "right",
+  // "ignoreit.array": [".env", "node_modules", "coverage"],
   "editor.wordWrap": "on",
   "editor.tabSize": 2,
   "files.autoSave": "off",
@@ -13,14 +21,9 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "editor.fontSize": 17,
-  "workbench.colorTheme": "Dark Knight Rises",
   "vscode_custom_css.imports": ["file:///home/fattylee/the-dark-knight.css"],
   "vscode_custom_css.policy": true,
   "javascript.updateImportsOnFileMove.enabled": "always",
-  "emmet.includeLanguages": {
-    "javascript": "javascriptreact"
-  },
-  "emmet.triggerExpansionOnTab": true,
   "vim.easymotion": true,
   "vim.insertModeKeyBindings": [
     {
@@ -82,5 +85,14 @@
   "vim.useSystemClipboard": true,
   "vim.ignorecase": true,
   "vim.smartcase": true,
-  "vim.gdefault": true
+  "vim.gdefault": true,
+  "explorer.confirmDelete": false,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "workbench.editor.showTabs": true,
+  "git.enableSmartCommit": true,
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "tailwindCSS.emmetCompletions": true,
+  "workbench.colorTheme": "Dark Knight Rises"
 }
