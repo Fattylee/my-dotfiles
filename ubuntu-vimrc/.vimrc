@@ -29,10 +29,22 @@ Plug 'ap/vim-css-color'
 Plug 'KabbAmine/vCoolor.vim'
 " Plug 'nathanaelkane/vim-indent-guides'
 " Plug 'lepture/vim-jinja'
-Plug 'Yggdroot/indentLine'
+" Plug 'Yggdroot/indentLine'
 Plug 'luochen1990/rainbow'
 Plug 'mhinz/vim-startify'
+Plug 'kassio/neoterm'
+Plug 'tpope/vim-rsi'
+Plug 'jparise/vim-graphql'
 call plug#end()
+
+
+" kassio-neoterm start
+let g:neoterm_default_mod='belowright' " open terminal in bottom split
+let g:neoterm_size=16 " terminal split size
+let g:neoterm_autoscroll=1 " scroll to the bottom when running a command
+nnoremap <leader><cr> :TREPLSendLine<cr>j " send current line and move down
+vnoremap <leader><cr> :TREPLSendSelection<cr> " send current selection
+" kassio-neoterm end
 
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 
@@ -132,7 +144,7 @@ colorscheme gruvbox
 
 " sync open file with NERDTree
 " " Check if NERDTree is open or active
-function! IsNERDTreeOpen()        
+function! IsNERDTreeOpen()
   return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
 endfunction
 
