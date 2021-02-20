@@ -35,8 +35,41 @@ Plug 'mhinz/vim-startify'
 Plug 'kassio/neoterm'
 Plug 'tpope/vim-rsi'
 Plug 'jparise/vim-graphql'
+" Plug 'altercation/vim-colors-solarized'
+" Plug 'dracula/vim', { 'as': 'dracula' }
+" Plug 'HenryNewcomer/vim-theme-papaya'
+Plug 'mhartington/oceanic-next'
+" Plug 'dsznajder/vscode-es7-javascript-react-snippets'
+" , { \ 'do': 'yarn install --frozen-lockfile && yarn compile' }
 call plug#end()
 
+" Plug 'mhartington/oceanic-next'
+if (has("termguicolors"))
+ set termguicolors
+endif
+
+" Theme
+syntax enable
+colorscheme OceanicNext
+
+" Plug 'HenryNewcomer/vim-theme-papaya'
+" colorscheme papaya
+" if (has("termguicolors"))
+"   set termguicolors
+" endif
+" let g:papaya_gui_color='blue'
+
+" vim-color-solarized settings
+" syntax enable
+" set background=dark
+" colorscheme solarized
+" let g:solarized_termcolors=256
+" call togglebg#map("<F5>")
+
+" dracula/vim
+" packadd! dracula
+" syntax enable
+" colorscheme dracula
 
 " kassio-neoterm start
 let g:neoterm_default_mod='belowright' " open terminal in bottom split
@@ -110,7 +143,7 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 "autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 
 
-" ctrlp
+" ctrlp  " Plug 'ctrlpvim/ctrlp.vim' " fuzzy find files
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 " j/k will move virtual lines (lines that wrap)
@@ -140,7 +173,17 @@ set hlsearch
 "set y and p for both system and vim
 set clipboard^=unnamed,unnamedplus
 
-colorscheme gruvbox
+" vim handle long lines correctly
+set wrap
+set textwidth=79
+set formatoptions=qrn1
+set colorcolumn=80
+
+nnoremap ; :
+inoremap jj <ESC>
+
+" uncomment nextline for gruvbox to work
+" colorscheme gruvbox
 
 " sync open file with NERDTree
 " " Check if NERDTree is open or active
@@ -323,4 +366,4 @@ set statusline^=%{get(g:,'coc_git_status','')}%{get(b:,'coc_git_status','')}%{ge
 " tpope vim-repeat
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 "To get correct comment highlighting for coc-settings.json
-autocmd FileType json syntax match Comment +\/\/.\+$+
+autocmd FileType json syntax match Co+$+

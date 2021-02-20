@@ -5,7 +5,7 @@ export TERM="xterm-256color"
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 # this is my funky path customization from fattylee boss
 if [ -f ~/.bashrc ]; then
-  export PATH="/home/fattylee/.config/yarn/global/node_modules/.bin:/home/fattylee/bin:$PATH"
+  export PATH="/home/fattylee/.config/yarn/global/node_modules/.bin:/home/fattylee/bin:/home/fattylee/.local/bin:$PATH"
 fi
 
 # Path to your oh-my-zsh installation.
@@ -77,8 +77,9 @@ ZSH_THEME="agnoster"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-git
-colored-man-pages
+  git
+  colored-man-pages
+  history
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -143,3 +144,10 @@ source /usr/share/powerlevel9k/powerlevel9k.zsh-theme
 
 # to setup vim mode in the terminal uncomment the next line
 # bindkey -v
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
